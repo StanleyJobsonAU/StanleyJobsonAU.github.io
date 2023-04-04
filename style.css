@@ -1,0 +1,179 @@
+body {
+	background-image: url('assets/dragon-bg-1.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0,0.9); /* 50% transparent black */
+	color: darkgreen;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	background-image: url('assets/bg.jpg');
+    background-size: cover;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+
+nav ul {
+	display: flex;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	margin-right: 1em;
+	position: relative;
+	padding-left: 2em;
+}
+
+nav li::before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	height: 100%;
+	width: 2px;
+	background-color: black;
+}
+
+nav li:first-of-type::before {
+	display: none;
+}
+
+nav a {
+	color: white;
+	text-decoration: none;
+	padding: 0.5em 1em;
+	border-radius: 0.25em;
+	transition: background-color 0.2s ease-in-out;
+}
+
+nav a:hover {
+	background-color: white;
+	color: darkgreen;
+}
+
+#profile {
+	border-radius: 50%;
+	height: 8em;
+	margin: 1em 1em 1em 0;
+	object-fit: cover;
+	overflow: hidden;
+	width: 8em;
+}
+table 
+  {
+	border: 2px dashed white;
+	margin: 10px;
+	border-collapse: collapse;
+  }
+th 
+{
+	border: 2px dashed white; color: white;
+	margin: 10px;
+	padding: 10px;
+}
+td 
+{
+	border: 2px dashed white; color: white;
+	margin: 10px;
+	padding: 10px;
+}
+
+#banner {
+	color: white;
+	font-size: 3em;
+	margin: 0;
+	white-space: nowrap;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: calc(100px + 10%);
+	cursor: pointer;
+}
+
+#container {
+	margin-top: 10em;
+	display: flex;
+}
+
+#left-column {
+	width: 50%;
+	padding: 2em;
+	border: 2px solid darkgreen;
+}
+
+#left-column-full {
+	width: 100%;
+	padding: 2em;
+	border: 2px solid darkgreen;
+}
+
+#right-column {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	border: 2px solid darkgreen;
+}
+
+#section-1, #section-2 {
+	flex-grow: 1;
+	padding: 2em;
+	border: 2px solid darkgreen;
+}
+#header {
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+#sub-header {
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+.lightgreen {
+	color: rgb(74, 246, 38); /* white */
+}
+#para-header {
+  font-family: monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: rgb(74, 246, 38); /* white */
+}
