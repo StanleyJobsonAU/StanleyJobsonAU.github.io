@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stanley Jobson</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js"></script>
+</head>
+<nav>
+    <img id="profile" src="assets/profile-pic.jpg" alt="Profile Picture">
+    <h1 id="banner">Stanley Jobson</h1>
+    <ul>
+        <li><a href="#" onclick="loadContent('r-and-d.html')">Research & Projects</a></li>
+        <li><a href="#" onclick="loadContent('certifications.html')">Certifications</a></li>
+        <li><a href="#" onclick="loadContent('talks-and-presentations.html')">Talks & Presentations</a></li>
+        <li><a href="#" onclick="loadContent('experience.html')">Experience</a></li>
+        <li><a href="#" onclick="loadContent('publications.html')">Publications</a></li>
+        <li><a href="#" onclick="loadContent('blog.html')">Blog</a></li>
+    </ul>
+</nav>
+
+<div id="container">
+<div id="left-column-full">
+	<h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/publications</span><span class="blue">]</span></h1>
+	<h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">./publications tp-link</span></h1>
+	<div class="publication">
+		<section>
+			<h2>Overview</h2>
+			<p>I discovered a remote code execution vulnerability within the Web Portal of the <b>TP-Link Archer VR1600V</b> router.<br> This vulnerability can be exploited via a single HTTP request and allows an attacker with administrative access to the <br>web portal to gain administrative access to the underlying operating system. It is important to note that the <br>vulnerability requires local network access and cannot be exploited over the internet. The impacts of this <br>vulnerability are severe and wide-ranging. An attacker could modify the contents of the device and cause a loss of <br>availability to the device by deliberately modifying certain data within the device which would cause a boot failure on <br>the device. Furthermore, the confidentiality of the binaries and firmware could be compromised, as they would now be <br>accessible to the attacker. This would also allow an attacker to modify running configurations outside the parameters <br>of the vendor, potentially causing additional security issues. I followed responsible disclosure guidelines and <br>coordinated with the vendor to ensure that the vulnerability is patched in a timely and secure manner. </p>
+		</section>
+		
+		<section>
+			<h2>Technical Details</h2>
+			<p>The vulnerability affects devices with a firmware version of <b><= 0.1.0 0.9.1 v5006.0 Build 220518 Rel.32480n</b>. 
+				<br>The root cause of the issue is that a specific variable called <b>X_TP_IfName</b> that is passed to the web server <br>in a POST request during certain operations within the web portal is passed directly into an Operating System command. 
+				<br><br>
+				<br>The issue occurs because the user can supply arbitrary values within this variable including shell metacharacters <br>which can be used to 'break out' of the intended command and then run additional commands. While there was some <br>sanitization performed on this parameter (it was restricted to 15 characters which is not a lot of room for command <br>injection). A suitable bypass was eventually found which enabled unlimited code execution on the device.
+				<br><br>
+				<br>As a simple example, consider the following scenario: There exists a service within a web page which checks if <br>another host is online. It may utilize the built-in "Ping" command to do this. The service will take a variable <br>called "host" from the user and then construct the following operating system command: ping <host> -c 4 returning <br>the result to the end user. Secondly, there exists methods to "stack" commands. For Linux operating systems, the ';<br>' character can be used to append a command (e.g. ping 127.0.0.1; echo a) which will first execute the ping, then <br>execute the echo command. Referring back to our example, the service will work if the user supplies the expected <br>value (e.g. a website name or an IP address). However, if the user supplies the character to stack a command, <br>followed by another arbitrary command, they can get underlying code execution on the system even though it was not <br>intended.
+				<br><br>
+				<br>So a vector is in hand to achieve command execution, however it is extremely limited. 15 characters is not enough <br>to build a traditional reverse shell. There are several possible options. One option is to use the vulnerability <br>repeatedly to build a script character by character, make the script executable with the chmod command and then <br>execute it directly via the vulnerability. This was not possible as the underlying operating system was a Linux <br>MIPS operating System which did not include the "print" command. The print command is a prerequisite for this sort <br>of method because it does not print a trailing new-line character which is a must for building the script character <br>by character. Trying to do this using the available 'echo' command resulted in new-lines being inserted into the <br>script on each execution rendering it useless. Another method to consider was using an available binary to expose <br>pseudo operating system access or shell access. Two prerequisites are needed for this a) the ability to use the <br>binary to create a shell and b) the ability for the binary to be remotely exposed by binding to the local network <br>interface (because we don't already have local shell access).
+				<br><br>
+				<br>After searching, telnetd was identified as a candidate where we can expose a shell even with the character <br>restrictions. There is a feature of telnetd where you can specify what program to run on the telnet daemon using <br>the "-L" flag. By default this is /bin/logon. However we can specify an arbitrary program, including the shell <br>binary (sh) which would provide a TTY interface. This meets our first prerequisite. The telnet daemon is a well <br>known program for remotely interacting with systems. It by default binds to Port 23 on the local network. A port <br>can also be specified with the "-p" parameter, however there is not enough room for this. Therefore we are limited <br>to the default Port of 23. However this satisfies condition two, that the binary be able to be remotely exposed. We <br>can therefore specify the 'sh' shell to be tied to the telnet daemon and exposed via Port 23 with the following <br>command: 'telnetd -l sh'. Including the two stack command characters, this totals exactly 15 characters. Just <br>enough to fit into the injection point. As the web server is running as admin, the shell exposed via the interface <br>is admin too. This gives us total remote access to the device.
+				<br><br>
+				<br>That being said, it is important to note that the web portal is not exposed remotely, and this is a completely <br>local attack vector which cannot be exploited via the internet. As a result, an attacker must have local network <br>access to the device and given we are required to access the administrator portal, must have administrative access <br>as well. This is typically a default set of credentials but can be configured by the user.</p>
+		</section>
+		
+		<section>
+			<h2>Reproduction Steps</h2>
+			<p>The vulnerability can be demonstrated with the following request:<p>
+			<code>
+				POST /cgi?2 HTTP/1.1<br>
+				Host: 192.168.1.1<br>
+				User-Agent: python-requests/2.20.0<br>
+				Accept-Encoding: gzip, deflate<br>
+				Accept: */*<br>
+				Connection: close<br>
+				TokenID: <token><br>
+				Referer: http://192.168.1.1/<br>
+				Cookie: JSESSIONID=<Session><br>
+				Content-Length: 81<br>
+				<br>
+				[WAN_IP_CONN#1,7,1,0,0,0#0,0,0,0,0,0]0,2<br>
+				X_TP_IfName=;telnetd -l sh;<br>
+				enable=1<br>
+			</code>
+		</section>
+		
+		<section>
+			<h2>Disclosure Timeline</h2>
+			<p><b>15-Jan-2023</b> - Issue identified<br>
+				<b>27-Jan-2023</b> - Issue submitted to TP-Link Security<br>
+				<b>29-Jan-2023</b> - Issue confirmed received by TP-Link<br>
+				<b>03-Feb-2023</b> - Issue confirmed by TP-Link Security<br>
+				<b>06-Mar-2023</b> - Beta Firmware tested and issue confirmed Fix<br>
+				<b>14-Apr-2023</b> - Issue confirmed fixed in latest available firmware</p>
+		</section>
+	</div>
+	  
+</div>
+</div>
+</html>

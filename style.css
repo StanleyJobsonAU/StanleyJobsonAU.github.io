@@ -10,7 +10,12 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
+p {
+	word-wrap: break-word;
+}
+section {
+	word-wrap: break-word;
+}
 nav {
 	background-image: url('assets/bg.jpg');
     background-size: cover;
