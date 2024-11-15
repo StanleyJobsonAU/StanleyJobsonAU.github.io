@@ -1,61 +1,448 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Stanley Jobson</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
+    <meta charset="UTF-8">
+    <title>Stanley Jobson - Personal Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Stanley Jobson's personal website showcasing research, certifications, talks, experience, publications, and blog.">
+    <meta name="keywords" content="Cybersecurity, Penetration Testing, CVE, Research, Blog">
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://stanleyjobson.github.io/",
+        "name": "Stanley Jobson",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://stanleyjobson.github.io/index.html#blog",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<nav>
-		<img id="profile" src="assets/profile-pic.jpg" alt="Profile Picture">
-		<h1 id="banner">Stanley Jobson</h1>
-		<ul>
-			<li><a href="#" onclick="loadContent('r-and-d.html')">Research & Projects</a></li>
-			<li><a href="#" onclick="loadContent('certifications.html')">Certifications</a></li>
-			<li><a href="#" onclick="loadContent('talks-and-presentations.html')">Talks & Presentations</a></li>
-			<li><a href="#" onclick="loadContent('experience.html')">Experience</a></li>
-			<li><a href="#" onclick="loadContent('publications.html')">Publications</a></li>
-			<li><a href="#" onclick="loadContent('blog.html')">Blog</a></li>
-		</ul>
-	</nav>
-	<div id="container">
-		<div id="left-column">
-			<h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
-			<h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">whoami</span></h1>
-			<p> <b>Luke Schmidt</b> - Experienced penetration tester with over 5+ years experience in cyber-security. Have worked in the financial, resources and health sectors doing roles ranging from compliance and GRC assessments to technical internal and external penetration tests as well as Mobile, Thick App and Infrastructure testing.</p>
-			<h3 id="para-header">HackTheBox:</h3>
-			<p> My username is StanleyJobson on the HackTheBox platform. I have achieved Pro Hacker rank, but don't have much time for it these days.</p>
-			<a href="https://www.hackthebox.eu/home/users/profile/122635"><img src="https://www.hackthebox.eu/badge/image/122635" alt="StanleyJobson" style="display: unset"></a>
-			<p> I am part of Jim's Pentesting on the HackTheBox platform. This is also our team for CTF challenges.</p>
-			<a href="https://app.hackthebox.com/teams/overview/4029"><img src="https://www.hackthebox.eu/badge/image/1468852" alt="JimsPentesting" style="display: unset"></a>
-			<br>
-			<h3 id="para-header">HackerOne:</h3>
-			<p> My username is StanleyJobson on the HackerOne Bug Bounty Platform.</p>
-			<a href="https://hackerone.com/stanleyjobson?type=user"><img src="assets/HackerOne.png" alt="Hacker One" style="display: unset"></a>
-		</div>
-		<div id="right-column">
-			<div id="section-1">
-				<h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
-				<h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">pwd</span></h1>
-				<p>Currently employed as a Senior Penetration Tester for one of the largest banks in Australia.</p>
-				<a href="https://www.linkedin.com/in/luke-schmidt-38213555/"><img src="assets/linkedin-2.png" alt="LinkedIn" style="display: unset"></a>
-				<br>
-				<p>Alumni of ECU<br>
-				* Graduate Diploma Cyber Security (2017)<br>
-				* Bachelor of Computer and Network Security (2012)</p>
-				
-				<a href="https://www.linkedin.com/company/163569"><img src="assets/ecu-1.jpg" alt="ECU" style="display: unset"></a>
-			</div>
-			<div id="section-2">
-				<h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
-				<h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">head achievements.txt</span></h1>
-				<p>* Google Hall of Fame - 2013</p>
-				<p>* Asterisk Ethical Hacking Prize - 2017</p>
-				<p>* GIAC Advisory Board - 2021</p>
-				<p>Error: Unexpected end of file</p>
-			</div>
-		</div>
-	</div>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-left">
+            <img id="profile" src="assets/profile-pic.jpg" alt="Profile Picture">
+            <h1 id="banner">Stanley Jobson</h1>
+        </div>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+            &#9776;
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#research">Research & Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#talks">Talks & Presentations</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#blog">Blog</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div id="container">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div id="left-column">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">whoami</span></h1>
+                <p><b>Luke Schmidt</b> - Experienced penetration tester with over 5+ years experience in cyber-security. Have worked in the financial, resources and health sectors doing roles ranging from compliance and GRC assessments to technical internal and external penetration tests as well as Mobile, Thick App and Infrastructure testing.</p>
+                <h3 id="para-header">HackTheBox:</h3>
+                <p>My username is StanleyJobson on the HackTheBox platform. I have achieved Pro Hacker rank, but don't have much time for it these days.</p>
+                <a href="https://www.hackthebox.eu/home/users/profile/122635" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.hackthebox.eu/badge/image/122635" alt="StanleyJobson" loading="lazy">
+                </a>
+                <p>I am part of Jim's Pentesting on the HackTheBox platform. This is also our team for CTF challenges.</p>
+                <a href="https://app.hackthebox.com/teams/overview/4029" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.hackthebox.eu/badge/image/1468852" alt="JimsPentesting" loading="lazy">
+                </a>
+                <br>
+                <h3 id="para-header">HackerOne:</h3>
+                <p>My username is StanleyJobson on the HackerOne Bug Bounty Platform.</p>
+                <a href="https://hackerone.com/stanleyjobson?type=user" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/HackerOne.png" alt="Hacker One" loading="lazy">
+                </a>
+            </div>
+            <div id="right-column">
+                <div id="section-1">
+                    <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
+                    <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">pwd</span></h1>
+					<a href="https://www.linkedin.com/in/luke-schmidt-38213555/" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/linkedin-2.png" alt="LinkedIn" loading="lazy">
+                    </a>
+					<p>Currently employed as a Senior Penetration Tester for one of the largest banks in Australia.</p>
+                    <br>
+					<a href="https://www.linkedin.com/company/163569" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/ecu-1.jpg" alt="ECU" loading="lazy">
+                    </a>
+					<p>Alumni of ECU
+					<ul>
+						<li>Graduate Diploma Cyber Security (2017)</li>
+						<li>Bachelor of Computer and Network Security (2012)</li>
+					</ul>
+                </div>
+                <div id="section-2">
+                    <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/</span><span class="blue">]</span></h1>
+                    <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">head achievements.txt</span></h1>
+                    <ul>
+						<li>Google Hall of Fame - 2013</li>
+						<li>Asterisk Ethical Hacking Prize - 2017</li>
+						<li>GIAC Advisory Board - 2021</li>
+					</ul>
+                    <p>Error: Unexpected end of file</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research & Projects Section -->
+        <section id="research" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/research</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">tail -f projects.txt</span></h1>
+                <h3 id="para-header">Embedded Devices:</h3>
+                <p>Performing research into embedded device security, particularly with Home/Small Office routing equipment and telephony devices.</p>
+                <h3 id="para-header">Vulnerable Web Application Development:</h3>
+                <p>Developing an OSWE-style Java-based web application that students can use to practise for the exam.</p>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/certifications</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">cat certs.txt</span></h1>
+                <h3 id="para-header">OffSec:</h3>
+                <p>OffSec Web Expert (OSWE) - 2023</p>
+                <a href="https://www.credential.net/22153bf8-cc7a-4920-af76-5c9d82d3920b#gs.ufow10" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/oswe-1.png" alt="OSWE" loading="lazy">
+                </a>
+                <p>OffSec Certified Professional (OSCP) - 2019</p>
+                <a href="https://www.credential.net/880b0a9d-2748-441b-b467-e1c98d9018bf#gs.uforjv" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/oscp-1.png" alt="OSCP" loading="lazy">
+                </a>
+                <h3 id="para-header">SANS:</h3>
+                <p>GIAC Mobile Device Security Analyst (GMOB) - 2021</p>
+                <a href="https://www.credly.com/badges/a782bdf2-40e5-4b4d-a1ed-3cd4fa8b4853" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/gmob-1.png" alt="GMOB" loading="lazy">
+                </a>
+                <p>GIAC Advisory Board - 2021</p>
+                <a href="https://www.credly.com/badges/e860391e-59d9-4230-9139-8dc03a5881bb" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/giac-1.png" alt="GIAC" loading="lazy">
+                </a>
+                <h3 id="para-header">Zero-Point Security:</h3>
+                <p>Certified Red Team Operator (CRTO) - 2022</p>
+                <a href="https://eu.badgr.com/public/assertions/y3yvyLT3RvyUB3k3cFqn9Q" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/crto-1.png" alt="CRTO" loading="lazy">
+                </a>
+            </div>
+        </section>
+
+        <!-- Talks & Presentations Section -->
+        <section id="talks" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/talks</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">./talks</span></h1>
+                <p>Here's where I would have content if people wouldn't stop rejecting my RFPs</p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/experience</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">head experience.txt</span></h1>
+                <!-- Most Recent First -->
+                <h3 id="para-header">Internal Penetration Testing</h3>
+                <p><b>Penetration Tester - Australian Resources Organization - 2020</b><br>
+                Conducted a thorough assessment of Active Directory environment, simulating various attack scenarios to identify vulnerabilities and weaknesses within the system which led to privilege escalation to Domain Administrator.</p>
+                
+                <h3 id="para-header">External Penetration Testing</h3>
+                <p><b>Penetration Tester - Australian Health Organisation - 2019</b><br>
+                Performed a comprehensive assessment of the resources company's external services and identified vulnerabilities within the system. Through these vulnerabilities, you were able to gain access to the Domain Admin account remotely via the internet.</p>
+                
+                <h3 id="para-header">Bug Bounty Hunter</h3>
+                <p><b>Bug Bounty Hunter - SnapChat - 2021</b><br>
+                During 2021 I lawfully conducted a vulnerability assessment against several of SnapChat's online services, including Android and Apple mobile applications. During the assessment I was able to uncover a security flaw in the application and provided the results to the Snapchat Security team. The bug was triaged as Low and awarded a $250 bounty.</p>
+                
+                <h3 id="para-header">Identity and Access Management</h3>
+                <p><b>IAM SME - Australian Government Organisation - 2015</b><br><br>
+                Acted as a Subject Matter Expert in Identity and Access Management for the work orders team of a government business unit. The key aspects of this role involved developing Java-based solutions for the Oracle Identity and Access Management suite of the unit to support a functional upgrade.</p>
+                
+                <h3 id="para-header">Information Risk Management</h3>
+                <p><b>Analyst - Global Oil and Gas Corporation - 2013</b><br>
+                I worked in a managerial context as an Information Risk Management analyst for the Information Management team. Working with key stakeholders, I ensured compliance of internal applications and organised compliance-related activities. I conducted compliance assessments (ISO:27001), facilitated conferences, and outlined remediation strategies and exception management for the applications.</p>
+                
+                <h3 id="para-header">Web Application Assessments</h3>
+                <p><b>Bug Bounty Hunter - Google - 2013</b><br>
+                During the month of April 2013 I lawfully conducted a vulnerability assessment against several of Google’s online services. During the assessment I was able to uncover several security flaws in the applications and provided the results to the Google Security team. For my efforts I was inducted into the Google Application Security ‘Hall of Fame’.</p>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/publications</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">./publications</span></h1>
+                
+                <!-- Ordered List for Publications -->
+                <ol class="publications-list">
+                    <li>
+                        <a href="https://www.cvedetails.com/cve/CVE-2023-31756/" target="_blank" rel="noopener noreferrer">
+                            CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution
+                        </a>
+                    </li>
+                    <!-- Add more publications here as needed -->
+                </ol>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="content-section">
+            <div id="left-column-full">
+                <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/blog</span><span class="blue">]</span></h1>
+                <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">mysql -u root -p </span></h1>
+                <h1 id="sub-header"><span class="white">USE blog_db;</span></h1>
+                <h1 id="sub-header"><span class="white">SELECT * FROM blogs;</span></h1>
+
+                <!-- MySQL-Style Table for Blog Entries -->
+                <div id="blog-table">
+                    <table class="mysql-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2023-07-15</td>
+                                <td><a href="#blog/tp-link-advisory" onclick="showBlogPost('tp-link-advisory')">CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution</a></td>
+                            </tr>
+                            <!-- Add more blog entries here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Individual Blog Posts (Initially Hidden) -->
+                <div id="tp-link-advisory" class="blog-post">
+                    <div class="blog-header">
+                        <h2>CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution</h2>
+                        <button onclick="showBlogList()" class="back-button">Back to Blog</button>
+                    </div>
+					<section>
+						<p>
+							In this blog post, I want to outline my motivations for researching my Archer router. What initially triggered my interest and my journey from being a novice in hardware hacking to achieving Remote Code Execution (RCE) on my home router.
+						</p>
+						
+						<h3>Motivations:</h3>
+						<p>
+							I am an avid data collector. I gather a lot of data that I use throughout my day-to-day life, including but not limited to massively oversized VMware images (MOVMWI, not to be confused with MMORPGs), wordlists, training material, and more. It may come as a shock to the wider world, but I don't always stay in one place. I move between houses, sometimes staying at my dad's place. Last Christmas, we were planning to have lunch at my dad's house, and I thought it would be a great idea if I could access my vast Christmas music collection hosted on my NAS from there. It seemed like a relatively simple task. In fact, I was sure that in the past, I had seen an OpenVPN configuration on my iiNet-issued Archer router. This would be an ideal solution for me—hosting the VPN server on the edge router rather than exposing a hosted VPN server that I would have to access via some sketchy port forwarding setup. Long story short, I went ahead and opened my router's web management interface, logged in with the tried and true admin:admin, and started looking for my OpenVPN section. This is where the fun began.
+						</p>
+						
+						<h3>The Problem:</h3>
+						<p>
+							The OpenVPN configuration that I was sure I had observed before was nowhere to be seen.
+						</p>
+						
+						<img src="assets/blog-1-1.jpg" alt="Blog Image 1" title="blog-1-1.jpg" loading="lazy">
+						
+						<p>
+							I knew I had seen it in the past, and a brief look on the WayBackMachine confirmed my suspicions. It WAS there... at least at some point.
+						</p>
+						
+						<img src="assets/blog-1-2.jpg" alt="Blog Image 2" title="blog-1-2.jpg" loading="lazy">
+						
+						<p>
+							It turns out the folks over at TPG don't really trust users to avoid accidentally exposing their entire network, so the ability to configure the OpenVPN server was quietly removed from the list of available features and pushed via an over-the-air update (more on that foreshadowing later!).
+						</p>
+						
+						<img src="assets/blog-1-3.jpg" alt="Blog Image 3" title="blog-1-3.jpg" loading="lazy">
+						
+						<p>
+							I did a bit of internet sleuthing, and my conclusions led me to believe that this menu item was still available. Indeed, the .html for this section still appeared partially intact when I was forcefully browsing, albeit non-functional. However, we need a "special" account called the 'su' account to access this. Why such an account would need to exist in the first place is somewhat beyond me, but hey. This led me down a rabbit hole of trying to access the 'su' account. I came across a really interesting post from another fellow named Marcello (<a href="https://www.marcelvarallo.com/archer-vr1600v-getting-root-or-super-user-credentials-the-easy-way/" target="_blank" rel="noopener noreferrer">Marcello's Blog</a>), where he was able to extract the hardcoded, unchangeable Super User password by coercing the monolithic C binary that is the TP-Link Web portal into disclosing the password via an actual legitimate function that runs all the time as you browse the web page. Unfortunately for me, that firmware version was a little bit older than mine, and TP-Link, after much consideration, decided it was no longer a great idea to have such a credential floating around. In my version, the password was replaced by the classic star obfuscation.
+						</p>
+						
+						<p>
+							This was the beginning of a huge waste of time, so I'll spare you the gory details for now and just tell you that after my analysis, the 'su' account is no longer functional from my firmware version (Build 220518 Rel.32480n) and beyond.
+						</p>
+						
+						<h3>The Solution:</h3>
+						<p>
+							At this point, I had a few options. I could either buy a newer (and, let's face it, better) router that has this VPN functionality available as standard, or I could gain underlying operating system access to the router, install or otherwise enable the OpenVPN service, and finally be able to listen to my Mariah Carey collection from my dad's place. Given that I didn't have anything better to do, I went with option B—hacking the router.
+						</p>
+						
+						<p>
+							Thus, I had to gain OS access to the router, which is not straightforward (you can't exactly just plug in a VGA cable to a monitor). I vaguely knew about UART and JTAG and that they could be used to interface with hardware devices, but I had never attempted this before. I began a YouTube video blitz and came across this video from Matt Brown (<a href="https://www.youtube.com/watch?v=HWJddAd2T5Q" target="_blank" rel="noopener noreferrer">Matt Brown's Video</a>) which perfectly describes the process of identifying UART and the respective pins (Rx, Tx, Ground, and VCC). You can watch that video for a better breakdown, but I'll explain the process roughly the same way.
+						</p>
+						
+						<p>
+							Armed with the knowledge from the video, I carefully voided my decades-since-expired warranty and cracked open the case. Immediately, I saw the four UART pins staring me in the face, so we were off to a great start! 
+							
+							<img src="assets/blog-1-4.jpg" alt="Blog Image 3" title="blog-1-4.jpg" loading="lazy">
+
+							To communicate via UART, I needed a couple of things first. I needed a device capable of sending and receiving signals to the UART ports from my computer and keyboard. For this, I used a USB to UART cable (specifically the FTDI TTL-232R-5V cable). Next, I needed some header pins and cables to solder onto the ports and then plug into the USB to UART adapter.
+						</p>
+						
+						<p>
+							With the gear ready to go, I set about identifying which ports were which. As a reminder, there are typically four:
+						</p>
+						
+						<ul>
+							<li>VCC (Consistent voltage of 3.3V)</li>
+							<li>Ground</li>
+							<li>Rx (Fluctuates when RECEIVING DATA FROM KEYBOARD)</li>
+							<li>Tx (Fluctuates when OUTPUTTING data)</li>
+						</ul>
+						
+						<p>
+							Finding Ground was easy enough. I took my multimeter and put it into continuity mode. I placed the black probe on a grounded plane (hint: the antenna on the wireless chips is always grounded) and then probed each of the UART ports until I heard a beep. The port that beeped is Ground. I found VCC by placing the multimeter back into voltage mode, placing the black probe on the Ground port, and then probing each of the ports while booting the device until I found a consistent 3.3V. The harder part was finding Rx and Tx. Both remaining ports were reading 0 volts throughout the boot process. I expected one to be 0 volts all the time (the Rx port because we obviously weren't sending any data) but the Tx port should have been active throughout the boot process. Then I took a closer look at the traces...
+						</p>
+						
+						<img src="assets/blog-1-5.jpg" alt="Blog Image 5" title="blog-1-5.jpg" loading="lazy">
+						
+						<p>
+							Yeah, those bastards had disconnected the traces! To restore full functionality, I had to reconnect the traces. This was a nightmare; I never soldered regularly, so I tried my best to keep it clean. But in case you're unaware, traces are very small, and inserting solder to reconnect them without bridging is a massive pain in the ass. Even under a scope, it's hard. The smallest soldering iron I had still looked like a baseball bat coming down over those poor traces. After much anguish, though, I finally got them reconnected, and when connected properly, I could easily see the Tx port. The final layout looked like this:
+						</p>
+						
+						<ul>
+							<li>VCC - 3.3V</li>
+							<li>Ground</li>
+							<li>Rx</li>
+							<li>Tx</li>
+						</ul>
+						
+						<p>
+							[BOARD PORTS ARE HERE]
+						</p>
+						
+						<p>
+							Now, it was just a matter of soldering on the header pins and hooking everything up. FTDI provides a pinout for the TTL-232R, so I knew exactly where to plug each cable into. The key thing to remember here is that the Rx pin on the device must connect to the Tx port on the USB device and vice versa. With everything connected, it looked a little something like this:
+						</p>
+						
+						<img src="assets/blog-1-6.jpg" alt="Blog Image 6" title="blog-1-6.jpg" loading="lazy">
+						
+						<p>
+							With the USB plugged in and the device all hooked up, I used a terminal program called PuTTY to broker the connection between my keyboard inputs and the device. Before starting the connection, you need to specify a Baud rate, which is essentially the speed at which the device sends electrical pulses. A typical Baud rate is 115200bps, and this was the case with the Archer router. UART transmissions can happen at different Baud rates, so you may get junk data if it's incorrect—you'll know something's wrong. I then booted up the device and...
+						</p>
+						
+						<img src="assets/blog-1-7.jpg" alt="Blog Image 7" title="blog-1-7.jpg" loading="lazy">
+						
+						<p>
+							Success! We have now effectively plugged in that VGA cable to the router. But then we, of course, reached our next roadblock:
+						</p>
+						
+						<img src="assets/blog-1-8.jpg" alt="Blog Image 8" title="blog-1-8.jpg" loading="lazy">
+						
+						<p>
+							Yeah, I don't know the password. I don't even know any usernames! I tried all the usual suspects: admin:admin, root:root, and no such luck. I was hoping the username and password were somewhere sitting on the device. But with no ability to log in, this was kind of an issue. Although I couldn't log in, I did, however, now see the entire boot process from start to finish since I had console access. One thing that caught my eye was an onboard shell specifically for debugging available on the device called the CFE (Common Firmware Environment). While booting, I used the shortcut key 't' to access this and was presented with a list of available commands, one of which included the ability to dump all the bytes of the flash memory! This would be great. If I could dump the storage, I could mount the image in Linux and view the data (and hopefully the password). This wasn't as useful as one might initially think because:
+						</p>
+						
+						<ul>
+							<li>We’re accessing this via console.</li>
+							<li>It only outputs the bytes to the screen (which I could log to a .txt file, but it's still annoying).</li>
+							<li>It also includes the ASCII representation on the right, which hampers any copy-paste efforts.</li>
+							<li>At 115200bps (4KB/s), this took fucking forever.</li>
+						</ul>
+						
+						<p>
+							Once all the bytes were dumped to a file, I stole a Python parser that another bloke had developed, which effectively stripped the ASCII representation on the right and left me with just sweet, sweet hex data. I was going to go through the effort of mounting it and browsing the files, but the laziness in me took over, and I just decided to grep for the word "admin" over the whole dataset. Lo' and behold, what returns is:
+						</p>
+						
+						<b>admin:1234</b>>
+						
+						<p>
+							Yeah, I didn't try that one, but holy shit, what a terrific password. 
+							
+							<img src="assets/blog-1-9b.jpg" alt="Blog Image 10" title="blog-1-9b.jpg" loading="lazy">
+							
+							I now had full operating system access via the console, and I was free to re-enable OpenVPN (luckily, the MIPS-compiled binary was still sitting there!). This might be the end of the story, but then there's the practical consideration. I can't just rip open the router every time I want to reconfigure OpenVPN. I needed an easier way to access this functionality, preferably without any wires. It was then I had the idea to try and get Remote Code Execution using my console access to help me debug.
+						</p>
+						
+						<p>
+							I noted that similar vulnerabilities for other TP-Link devices had been found on the web portal in the past (see this post here: <a href="https://pierrekim.github.io/blog/2017-02-09-tplink-c2-and-c20i-vulnerable.html" target="_blank" rel="noopener noreferrer">Pierrekim's Blog</a> and <a href="https://therealunicornsecurity.github.io/TPLink/" target="_blank" rel="noopener noreferrer">Unicorn Security's Blog</a>) and wanted to try my luck on this model. In the post above, you'll see that a function called 'util_execSystem()'—which essentially is a wrapper for the 'system()' function that can execute code—is used extensively in the binaries there. To check if this was the same for me, I pulled the httpd binary off the router and dropped it into Ghidra. Sure enough, after a quick search, I noticed it was there in this case too. I'm not too good at reverse engineering, so I will admit that despite trying to trace all the calls into this function, I didn't really get anywhere. My next approach was to start inserting the command stack character ";" into various parameters while using the web application. With my console access, I could see if any commands started going funky, indicating some sort of injection was occurring.
+						</p>
+						
+						<p>
+							I planned to test the web application menu from top to bottom, and I didn't have to go far (literally the first item) before I saw some interesting output on the console. The very first section in the web app is the "Edit Connections" page where you can modify the WAN interfaces of the device. When you update a device, it sends a payload with a lot of parameters about the interface being updated, one of which is called "X-TP-IfName" and contains the name of the interface. I changed this value to:
+						</p>
+						
+						<p>"p;echo i>tmp/h"</p>
+						
+						<img src="assets/blog-1-10.jpg" alt="Blog Image 10" title="blog-1-10.jpg" loading="lazy">
+						
+						<p>
+							I saw an error message saying something to the effect of "device not found" and then an output for the ifconfig command. It then clicked in my head—the web application must be restarting the interface via ifconfig when we update it, and we are passing user data straight into it! After some trial and error, I quickly discovered that I can only insert 14 characters, which is just not enough room for any kind of reverse shell. In the blog post above, the folks get access using Telnet. However, on this device, Telnet's default environment is a limited shell. We could start the service (it is disabled by default on the Archer), but when we access it, it would be in a jailed shell. So, I had to think outside the box. That's when I discovered the -l parameter. This parameter allows you to bind an arbitrary binary to the Telnet service. And what better one to use than sh :)
+						</p>
+						
+						<p>
+							Therefore, the full injection became ";telnetd -l sh", which was EXACTLY enough characters. There isn't even room to bind to a new port, so if TP-Link hadn't disabled Telnet and its default port was still in use, we would have been screwed. But in this case, it all worked out. The end result was a fully remote admin shell that I could use to set up my OpenVPN server finally. I don't know if it was worth the weeks of effort, but it sure was cool to me.
+							<img src="assets/blog-1-11.jpg" alt="Blog Image 10" title="blog-1-11.jpg" loading="lazy">
+							
+						</p>
+						
+						<p>
+							I Proof of Concept'd this out using Python, and it is available on my <a href="https://github.com/stanleyjobsonau" target="_blank" rel="noopener noreferrer">GitHub</a>.
+						</p>
+						
+						<section>
+							<h2>Reproduction Steps</h2>
+							<p>The vulnerability can be demonstrated with the following request:</p>
+							<code>
+								POST /cgi?2 HTTP/1.1<br>
+								Host: 192.168.1.1<br>
+								User-Agent: python-requests/2.20.0<br>
+								Accept-Encoding: gzip, deflate<br>
+								Accept: */*<br>
+								Connection: close<br>
+								TokenID: &lt;token&gt;<br>
+								Referer: http://192.168.1.1/<br>
+								Cookie: JSESSIONID=&lt;Session&gt;<br>
+								Content-Length: 81<br>
+								<br>
+								[WAN_IP_CONN#1,7,1,0,0,0#0,0,0,0,0,0]0,2<br>
+								X_TP_IfName=;telnetd -l sh;<br>
+								enable=1<br>
+							</code>
+						</section>
+						
+						<section>
+							<h2>Disclosure Timeline</h2>
+							<p>
+								<b>15-Jan-2023</b> - Issue identified<br>
+								<b>27-Jan-2023</b> - Issue submitted to TP-Link Security<br>
+								<b>29-Jan-2023</b> - Issue confirmed received by TP-Link<br>
+								<b>03-Feb-2023</b> - Issue confirmed by TP-Link Security<br>
+								<b>06-Mar-2023</b> - Beta Firmware tested and issue confirmed fixed<br>
+								<b>14-Apr-2023</b> - Issue confirmed fixed in latest available firmware
+							</p>
+						</section>
+					</section>
+					
+                    <!-- Add more content as needed -->
+                </div>
+
+                <!-- Add more blog posts here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Section (Reduced Height) -->
+    <footer>
+        <p>&copy; 2024 Stanley Jobson. All rights reserved.</p>
+    </footer>
+
+    <!-- Loading Spinner (Optional) -->
+    <div id="loading-spinner" class="spinner" style="display: none;"></div>
+
+    <!-- Link to JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

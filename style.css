@@ -1,184 +1,474 @@
+/* ========================= */
+/*        Reset & Base        */
+/* ========================= */
+
+/* Reset default browser styles */
+* {
+    box-sizing: border-box;
+}
+
 body {
-	background-image: url('assets/dragon-bg-1.png');
+    background-image: url('assets/dragon-bg-1.png');
     background-position: center bottom;
     background-repeat: no-repeat;
-	background-attachment: fixed;
+    background-attachment: fixed;
     object-fit: contain;
-    background-color: rgba(0, 0, 0,0.9); /* 50% transparent black */
-	color: white;
-	font-family: sans-serif;
-	margin: 0;
-	padding: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* 90% opaque black */
+    color: white;
+    font-family: monospace, sans-serif; /* Monospace for terminal feel */
+    margin: 0;
+    padding: 0;
+
+    /* Add padding-top equivalent to nav height */
+    padding-top: var(--nav-height, 80px); /* Default to 80px if variable not set */
 }
-p {
-	word-wrap: break-word;
+
+p, section {
+    word-wrap: break-word;
 }
-section {
-	word-wrap: break-word;
+
+/* ========================= */
+/*       CSS Variables         */
+/* ========================= */
+
+:root {
+    --nav-height: 80px; /* Default nav height */
+    --transition-speed: 0.5s;
+    --active-opacity: 1;
+    --inactive-opacity: 0;
+    --transition-property: opacity, visibility;
 }
+
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 120px; /* Increased height for stacked nav */
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --nav-height: 140px; /* Further increased for mobile */
+    }
+}
+
+/* ========================= */
+/*       Navigation Bar        */
+/* ========================= */
+
 nav {
-	background-image: url('assets/bg.jpg');
+    background-image: url('assets/bg.jpg');
     background-size: cover;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1em;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em; /* Default padding */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure nav stays on top */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    transition: padding 0.3s ease-in-out; /* Smooth transition for padding */
 }
 
-nav ul {
-	display: flex;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+/* Left side of the nav (Profile & Banner) */
+.nav-left {
+    display: flex;
+    align-items: center;
 }
 
-nav li {
-	margin-right: 1em;
-	position: relative;
-	padding-left: 2em;
-}
-
-nav li::before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translateY(-50%);
-	height: 100%;
-	width: 2px;
-	background-color: black;
-}
-
-nav li:first-of-type::before {
-	display: none;
-}
-
-nav a {
-	color: white;
-	text-decoration: none;
-	padding: 0.5em 1em;
-	border-radius: 0.25em;
-	transition: background-color 0.2s ease-in-out;
-}
-
-nav a:hover {
-	background-color: white;
-	color: white;
-}
-
+/* Profile Image */
 #profile {
-	border-radius: 50%;
-	height: 8em;
-	margin: 1em 1em 1em 0;
-	object-fit: cover;
-	overflow: hidden;
-	width: 8em;
-}
-table 
-  {
-	border: 2px dashed white;
-	margin: 10px;
-	border-collapse: collapse;
-  }
-th 
-{
-	border: 2px dashed white; color: white;
-	margin: 10px;
-	padding: 10px;
-}
-td 
-{
-	border: 2px dashed white; color: white;
-	margin: 10px;
-	padding: 10px;
+    border-radius: 50%;
+    height: 50px; /* Responsive size */
+    width: 50px;
+    margin-right: 1em;
+    object-fit: cover;
 }
 
+/* Banner Text */
 #banner {
-	color: white;
-	font-size: 3em;
-	margin: 0;
-	white-space: nowrap;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	left: calc(100px + 10%);
-	cursor: pointer;
+    color: white;
+    font-size: 1.5em; /* Responsive font size */
+    margin: 0;
+    white-space: nowrap;
+    cursor: pointer;
 }
+
+/* Hamburger Menu Icon */
+.hamburger {
+    display: none; /* Hidden by default */
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+    margin-left: 1em;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap; /* Allow links to wrap */
+}
+
+.nav-links li {
+    margin: 0 0.5em; /* Adjusted margin */
+    position: relative;
+    padding-left: 0.5em;
+}
+
+.nav-links li::before {
+    content: "";
+    display: none; /* Remove separators */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: white;
+    color: black; /* Improved contrast on hover and active */
+}
+
+/* ========================= */
+/*        Responsive Styles     */
+/* ========================= */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show hamburger */
+    }
+
+    .nav-links {
+        display: none; /* Hide nav links by default */
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show nav links when active */
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5em; /* Increased padding for larger nav height */
+    }
+
+    .nav-left {
+        width: 100%;
+        justify-content: flex-start;
+        margin-bottom: 1em;
+    }
+
+    #banner {
+        font-size: 1.2em;
+    }
+
+    .nav-links li {
+        width: 100%;
+        margin: 0.25em 0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 0.5em;
+    }
+
+    #profile {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    #banner {
+        font-size: 1em;
+    }
+
+    .nav-links a {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+    nav {
+        align-items: flex-start;
+        padding: 2em; /* Further increased padding for mobile */
+    }
+}
+
+/* ========================= */
+/*       Image Responsiveness  */
+/* ========================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0.5em 0;
+}
+
+/* ========================= */
+/*        Container Layout      */
+/* ========================= */
 
 #container {
-	margin-top: 10em;
-	display: flex;
+    /* Ensure content starts below the nav bar */
+    display: flex;
+    flex-direction: column;
+    padding: 1em; /* Optional: Add some padding */
+    min-height: calc(100vh - var(--nav-height, 80px) - 40px); /* Adjust for footer height */
+    transition: all var(--transition-speed) ease-in-out;
 }
 
-#left-column {
-	width: 50%;
-	padding: 2em;
-	border: 2px solid darkgreen;
+/* Sections */
+.content-section {
+    display: none; /* Hidden by default */
+    opacity: var(--inactive-opacity);
+    visibility: hidden;
+    transition: var(--transition-property) var(--transition-speed) ease-in-out;
+}
+
+/* Active Section */
+.content-section.active {
+    display: flex; /* Use flex to align columns */
+    flex-direction: row;
+    justify-content: space-between; /* Space between columns */
+    opacity: var(--active-opacity);
+    visibility: visible;
+    flex-wrap: nowrap; /* Prevent wrapping of columns */
+}
+
+/* Columns in Home Section and Full-Width Columns in Other Sections */
+#left-column, #right-column, #left-column-full {
+    padding: 2em;
+    border: 2px solid darkgreen;
+    margin: 0.5em;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    overflow: hidden; /* Prevent content overflow */
+    display: flex;
+    flex-direction: column;
+    /* Removed justify-content to prevent vertical spacing */
+    /* Removed min-height to allow boxes to fit content */
+}
+
+/* Specific Widths */
+#left-column, #right-column {
+    flex: 0 0 48%; /* Each column takes approximately half, accounting for margins */
 }
 
 #left-column-full {
-	width: 100%;
-	padding: 2em;
-	border: 2px solid darkgreen;
+    width: 100%;
 }
 
-#right-column {
-	flex-grow: 1;
-	display: flex;
-	flex-direction: column;
-	border: 2px solid darkgreen;
+/* Ensure content within columns does not wrap unwantedly */
+#left-column p, #right-column p, #left-column h1, #right-column h1, #left-column h3, #right-column h3,
+#left-column-full p, #left-column-full h1, #left-column-full h3 {
+    white-space: nowrap; /* Prevent wrapping in headers */
+    overflow: hidden; /* Prevent overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
-#section-1, #section-2 {
-	flex-grow: 1;
-	padding: 2em;
-	border: 2px solid darkgreen;
+/* Allow paragraphs to wrap */
+#left-column p, #right-column p, #left-column-full p {
+    white-space: pre-wrap; /* Allow wrapping within paragraphs */
 }
+
+/* Responsive Columns */
+@media (max-width: 768px) {
+    .content-section.active {
+        flex-direction: column; /* Stack columns vertically on smaller screens */
+    }
+
+    #left-column, #right-column, #left-column-full {
+        flex: 1 0 100%; /* Columns take full width when stacked */
+        margin: 0.5em 0; /* Adjust margins for vertical stacking */
+        /* Removed min-height to allow flexibility */
+    }
+}
+
+@media (max-width: 480px) {
+    #left-column, #right-column, #left-column-full {
+        padding: 1em; /* Reduce padding for mobile screens */
+    }
+}
+
+/* ========================= */
+/*          Tables             */
+/* ========================= */
+
+/* MySQL-Style Table */
+.mysql-table {
+    border: 2px dashed white;
+    margin: 10px 0;
+    border-collapse: collapse;
+    width: 100%; /* Ensure table takes full width */
+}
+
+.mysql-table th, .mysql-table td {
+    border: 2px dashed white;
+    color: white;
+    padding: 10px;
+    text-align: left; /* Improve readability */
+}
+
+/* ========================= */
+/*        Header Styles        */
+/* ========================= */
+
 #header {
-  font-family: monospace;
-  font-size: 20px;
-  letter-spacing: 1px;
+    font-family: monospace;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
-.blue {
-  color: blue;
-}
-
-.red {
-  color: red;
-}
-
-.white {
-  color: white;
-}
 #sub-header {
-  font-family: monospace;
-  font-size: 20px;
-  letter-spacing: 1px;
+    font-family: monospace;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 .blue {
-  color: blue;
+    color: blue;
 }
 
 .red {
-  color: red;
+    color: red;
 }
 
 .white {
-  color: white;
+    color: white;
 }
+
 .lightgreen {
-	color: rgb(74, 246, 38); /* white */
+    color: rgb(74, 246, 38); /* Light green */
 }
+
 #para-header {
-  font-family: monospace;
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: rgb(74, 246, 38); /* white */
+    font-family: monospace;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: rgb(74, 246, 38); /* Light green */
+}
+
+/* ========================= */
+/*         Additional           */
+/* ========================= */
+
+/* Ensure links and buttons are accessible and have focus styles */
+a:focus, .hamburger:focus, .back-button:focus {
+    outline: 2px solid yellow;
+}
+
+/* Smooth transitions for layout changes */
+nav, .nav-links, #container {
+    transition: all 0.3s ease-in-out;
+}
+
+/* ========================= */
+/*        Back Button Styling   */
+/* ========================= */
+
+/* Style for the Back button in blog posts */
+.back-button {
+    background-color: rgb(74, 246, 38); /* Light green background */
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 1em;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: darkgreen;
+    transform: scale(1.05);
+}
+
+.back-button:focus {
+    outline: 2px solid yellow;
+}
+
+/* ========================= */
+/*        Spinner Styles        */
+/* ========================= */
+
+/* Spinner Styles */
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid rgb(74, 246, 38);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ========================= */
+/*        Footer Styles         */
+/* ========================= */
+
+footer {
+    text-align: center;
+    padding: 0.3em; /* Further reduced padding to decrease height */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.8em; /* Further reduced font size */
+    line-height: 1.2; /* Adjusted line height */
+}
+
+/* ========================= */
+/*        Blog Post Styling     */
+/* ========================= */
+
+.blog-post {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    width: 100%;
+}
+
+.blog-post.active {
+    display: flex; /* Show when active */
+}
+
+.blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.blog-header h2 {
+    margin: 0;
+    flex: 1;
+}
+
+.blog-header .back-button {
+    margin-left: 1em;
 }
