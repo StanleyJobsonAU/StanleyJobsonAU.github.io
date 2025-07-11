@@ -21,6 +21,13 @@
 }
 }
 </script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+  integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer">
+</script>
+
 <!-- Link to CSS -->
 <link rel="stylesheet" href="style.css">
 </head>
@@ -55,7 +62,7 @@
 <p><b>Luke Schmidt</b> - Experienced penetration tester with over 5+ years experience in cyber-security. Have worked in the financial, resources and health sectors doing roles ranging from compliance and GRC assessments to technical internal and external penetration tests as well as Mobile, Thick App and Infrastructure testing.</p>
 <h3 id="para-header">HackTheBox:</h3>
 <p>My username is StanleyJobson on the HackTheBox platform. I have achieved Pro Hacker rank, but don't have much time for it these days.</p>
-<a href="https://www.hackthebox.eu/home/users/profile/122635" target="_blank" rel="noopener noreferrer">
+<a href="https://app.hackthebox.com/users/122635" target="_blank" rel="noopener noreferrer">
 <img src="https://www.hackthebox.eu/badge/image/122635" alt="StanleyJobson" loading="lazy">
 </a>
 <p>I am part of Jim's Pentesting on the HackTheBox platform. This is also our team for CTF challenges.</p>
@@ -109,6 +116,13 @@
 <p>Performing research into embedded device security, particularly with Home/Small Office routing equipment and telephony devices.</p>
 <h3 id="para-header">Vulnerable Web Application Development:</h3>
 <p>Developing an OSWE-style Java-based web application that students can use to practise for the exam.</p>
+<h3 id="para-header">Gadget Shop:</h3>
+<p>Developed a menu based Python tool to assist with the identification of x86 ROP Gadgets pulled from RP++ output. This was used for Challenge 2 and Chapter 6 of the OSED course.
+<a href="https://github.com/SirSwish/GadgetShop">Source</a>  
+</p>
+<h3 id="para-header">Shell Craft:</h3>
+<p>Developed a menu based Python tool to assist with the production of MASM style x86 Shellcode. Used for the Custom Shellcoding section of the OSED Course. Produces Null-Byte free shellcode.
+<a href="https://github.com/SirSwish/ShellCraft">Source</a>
 </div>
 </section>
 
@@ -118,6 +132,10 @@
 <h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/certifications</span><span class="blue">]</span></h1>
 <h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">cat certs.txt</span></h1>
 <h3 id="para-header">OffSec:</h3>
+<p>OffSec Exploit Developer (OSED) - 2025</p>
+<a href="https://www.credential.net/4af2eb3b-a6e5-4d83-8e02-c826d608f7e3#acc.JiXzx8uR" target="_blank" rel="noopener noreferrer">
+<img src="assets/osed-1.png" alt="OSWE" loading="lazy">
+</a>
 <p>OffSec Web Expert (OSWE) - 2023</p>
 <a href="https://www.credential.net/22153bf8-cc7a-4920-af76-5c9d82d3920b#gs.ufow10" target="_blank" rel="noopener noreferrer">
 <img src="assets/oswe-1.png" alt="OSWE" loading="lazy">
@@ -210,6 +228,38 @@ CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution
 <h1 id="sub-header"><span class="white">USE blog_db;</span></h1>
 <h1 id="sub-header"><span class="white">SELECT * FROM blogs;</span></h1>
 
+<!-- password-entry modal -->
+<div id="loginModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <!-- close button -->
+    <span id="modalClose" class="modal-close">×</span>
+
+    <!-- form with two overlaid inputs -->
+    <form id="loginForm" autocomplete="off" novalidate>
+      <input type="text"
+              id="modalUsername"
+              class="overlay-input username"
+               placeholder=""
+               autocomplete="off"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
+               required>
+      <input type="password"
+             id="modalPassword"
+             class="overlay-input password"
+             placeholder=""
+             required>
+      <button type="submit" style="display:none"></button>       
+    </form>
+
+    <!-- error feedback -->
+    <p id="modalError" class="error" style="display: none;">
+      Invalid credentials
+    </p>
+  </div>
+</div>
+
 <!-- MySQL-Style Table for Blog Entries -->
 <div id="blog-table">
 <table class="mysql-table">
@@ -223,11 +273,16 @@ CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution
 <tbody>
 <tr>
 <td>1</td>
+<td>2025-07-10</td>
+<td><a href="#blog/operation-swordfish" onclick="showBlogPost('operation-swordfish')">Operation Swordfish</a></td>
+</tr>
+<tr>
+<td>2</td>
 <td>2024-11-17</td>
 <td><a href="#blog/adf-soap-writeup" onclick="showBlogPost('adf-soap-writeup')">Holding the SOAP: An ADF Cyber Skills Challenge Write-Up</a></td>
 </tr>
 <tr>
-<td>2</td>
+<td>3</td>
 <td>2023-07-15</td>
 <td><a href="#blog/tp-link-advisory" onclick="showBlogPost('tp-link-advisory')">CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution</a></td>
 </tr>
@@ -237,11 +292,23 @@ CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution
 </div>
 
 <!-- Individual Blog Posts (Initially Hidden) -->
+<div id="operation-swordfish" class="blog-post"
+     data-encrypted="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">
+  <div class="blog-header">
+    <h2>Operation Swordfish</h2>
+    <button class="back-button" onclick="showBlogList()">Back to Blog</button>
+  </div>
+  <!-- we’ll inject the real HTML here only after decryption -->
+  <div class="blog-content"></div>
+</div>
+
+
 <div id="adf-soap-writeup" class="blog-post">
 <div class="blog-header">
 <h2>Holding the SOAP: An ADF Cyber Skills Challenge Write-Up</h2>
 <button onclick="showBlogList()" class="back-button">Back to Blog</button>
 </div>
+<div class="blog-content">
 <section>
     <style>
         pre {
@@ -842,13 +909,14 @@ The challenge, now that it was over, seemed mind-boggling that it took me so lon
 
 </section>
 </div>
+</div>
 
 <div id="tp-link-advisory" class="blog-post">
 <div class="blog-header">
 <h2>CVE-2023-31756: TP-Link Archer VR1600V Web Portal Remote Code Execution</h2>
 <button onclick="showBlogList()" class="back-button">Back to Blog</button>
 </div>
-<section>
+<div class="blog-content">
 <p>
 In this blog post, I want to outline my motivations for researching my Archer router. What initially triggered my interest and my journey from being a novice in hardware hacking to achieving Remote Code Execution (RCE) on my home router.
 </p>
@@ -1044,10 +1112,11 @@ enable=1<br>
 </div>
 </section>
 </div>
+</div>
 
 <!-- Footer Section (Reduced Height) -->
 <footer>
-<p>&copy; 2024 Stanley Jobson. All rights reserved.</p>
+<p>&copy; 2025 Stanley Jobson. All rights reserved.</p>
 </footer>
 
 <!-- Loading Spinner (Optional) -->

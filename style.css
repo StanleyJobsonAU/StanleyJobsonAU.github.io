@@ -377,6 +377,7 @@ nav, .nav-links, #container {
     transition: all 0.3s ease-in-out;
 }
 
+
 /* ========================= */
 /*        Back Button Styling   */
 /* ========================= */
@@ -472,3 +473,88 @@ footer {
 .blog-header .back-button {
     margin-left: 1em;
 }
+
+/* ====================
+   Overlay Backdrop + Centering
+   ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* ====================
+   Modal Box with Your Image
+   ==================== */
+.modal-content {
+  position: relative;
+  width: 75vmin;               /* was 60vmin, now 25% larger */
+  height: 75vmin;              /* keep it square */
+  max-width: 90vw;             /* keep your caps, unchanged */
+  max-height: 90vh;
+  background: url('/assets/login.png') no-repeat center center;
+  background-size: 100% 100%;  /* still stretch to fill */
+  border: 2px solid #4af626;
+  box-sizing: border-box;
+}
+
+/* ====================
+   Close “X” Button
+   ==================== */
+.modal-close {
+  position: absolute;
+  top: 8px;   /* tweak if needed */
+  right: 12px;
+  font-size: 1.5em;
+  color: #4af626;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ====================
+   Transparent Overlay Inputs
+   ==================== */
+.overlay-input {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+  outline: none;
+  caret-color: white;
+}
+/* right under your existing .overlay-input rule */
+.overlay-input {
+  background: transparent !important;
+}
+
+/* Align these to your drawn boxes in login.png */
+.overlay-input.username {
+  top: 50.5%;   /* adjust to fit */
+  left: 49%;
+  width: 38.5%;
+  height: 2.4em;
+}
+.overlay-input.password {
+  top: 59%;   /* adjust to fit */
+  left: 49%;
+  width: 38.5%;
+  height: 2.4em;
+}
+
+/* ====================
+   Error Message
+   ==================== */
+.error {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: #f55;
+  font-size: 0.9em;
+}
+
