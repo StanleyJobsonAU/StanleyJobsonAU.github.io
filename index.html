@@ -163,12 +163,49 @@
 
 <!-- Talks & Presentations Section -->
 <section id="talks" class="content-section">
-<div id="left-column-full">
-<h1 id="header"><span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/talks</span><span class="blue">]</span></h1>
-<h1 id="sub-header"><span class="blue">└─</span><span class="red"># </span><span class="lightgreen">./talks</span></h1>
-<p>Here's where I would have content if people wouldn't stop rejecting my RFPs</p>
-</div>
+  <div id="left-column-full">
+    <h1 id="header">
+      <span class="blue">┌──(</span><span class="red">root@stanleyjobson</span><span class="blue">)-[</span><span class="white">/talks</span><span class="blue">]</span>
+    </h1>
+    <h1 id="sub-header">
+      <span class="blue">└─</span><span class="red"># </span><span class="lightgreen">./talks</span>
+    </h1>
+
+    <!-- Talk: BSides 2025 - Ghosts At The Gateway -->
+    <article class="talk">
+      <h2 class="talk-title">
+        <span class="blue">[</span><span class="lightgreen">BSides 2025</span><span class="blue">]</span>
+        <span class="white">— Ghosts At The Gateway</span>
+      </h2>
+
+      <!-- Responsive YouTube embed -->
+      <div class="video-wrapper" aria-label="Video player: BSides 2025 - Ghosts At The Gateway">
+        <iframe
+          src="https://www.youtube.com/embed/EWnRypTR0m0"
+          title="BSides 2025 - Ghosts At The Gateway"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+
+      <p class="talk-note">
+        <span class="blue">#</span> Slides &amp; write-up coming soon.
+        <a href="https://www.youtube.com/watch?v=EWnRypTR0m0" target="_blank" rel="noopener">Open on YouTube</a>
+      </p>
+    </article>
+  </div>
 </section>
+
+<!-- Minimal CSS (optional) -->
+<style>
+  .talk-title { margin: 0.5rem 0 0.75rem; font-size: 1.25rem; line-height: 1.3; }
+  .talk-note { margin-top: 0.5rem; opacity: 0.9; }
+  .video-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+  .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+</style>
 
 <!-- Experience Section -->
 <section id="experience" class="content-section">
